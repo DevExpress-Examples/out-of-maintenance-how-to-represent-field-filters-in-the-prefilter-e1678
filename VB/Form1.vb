@@ -1,5 +1,4 @@
-Imports Microsoft.VisualBasic
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.ComponentModel
 Imports System.Data
@@ -12,11 +11,12 @@ Imports DevExpress.XtraPivotGrid
 Namespace S132472
 	Partial Public Class Form1
 		Inherits Form
+
 		Public Sub New()
 			InitializeComponent()
 		End Sub
 
-		Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+		Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 			' TODO: This line of code loads data into the 'nwindDataSet.ProductReports' table. You can move, or remove it, as needed.
 			Me.productReportsTableAdapter.Fill(Me.nwindDataSet.ProductReports)
 
@@ -28,22 +28,31 @@ Namespace S132472
 			Dim rootGroup As GroupOperator = TryCast(prefilter, GroupOperator)
 			If Object.ReferenceEquals(rootGroup, Nothing) Then
 				rootGroup = New GroupOperator(GroupOperatorType.And)
-				If (Not Object.ReferenceEquals(prefilter, Nothing)) Then
+				If Not Object.ReferenceEquals(prefilter, Nothing) Then
 					rootGroup.Operands.Add(prefilter)
 				End If
 			End If
 			If rootGroup.OperatorType = GroupOperatorType.Or Then
 				rootGroup = New GroupOperator(GroupOperatorType.And, rootGroup)
-            End If
-            SearchPropertyName = e.Field.Name
-            Dim op As InOperator = TryCast(rootGroup.Operands.Find(AddressOf FindItem), InOperator)
-			If e.Field.FilterValues.IsEmpty Then
-				If (Not Object.ReferenceEquals(op, Nothing)) Then
+			End If
+            Dim op As InOperator = CType(rootGroup.Operands.Find(Function(item As CriteriaOperator)
+                                                                     Dim binOp As InOperator = TryCast(item, InOperator)
+                                                                     If Object.ReferenceEquals(binOp, Nothing) Then
+                                                                         Return False
+                                                                     End If
+                                                                     Dim prop As OperandProperty = TryCast(binOp.LeftOperand, OperandProperty)
+                                                                     If Object.ReferenceEquals(prop, Nothing) Then
+                                                                         Return False
+                                                                     End If
+                                                                     Return prop.PropertyName = e.Field.Name
+                                                                 End Function), InOperator)
+            If e.Field.FilterValues.IsEmpty Then
+				If Not Object.ReferenceEquals(op, Nothing) Then
 					rootGroup.Operands.Remove(op)
 				End If
 			Else
 				If Object.ReferenceEquals(op, Nothing) Then
-                    op = New InOperator(New OperandProperty(e.Field.Name))
+					op = New InOperator(New OperandProperty(e.Field.Name))
 					rootGroup.Operands.Add(op)
 				End If
 				op.Operands.Clear()
@@ -56,18 +65,6 @@ Namespace S132472
 			Else
 				pivot.Prefilter.Criteria = Nothing
 			End If
-        End Sub
-        Private SearchPropertyName As String
-        Private Function FindItem(ByVal item As CriteriaOperator) As Boolean
-            Dim binOp As InOperator = TryCast(item, InOperator)
-            If Object.ReferenceEquals(binOp, Nothing) Then
-                Return False
-            End If
-            Dim prop As OperandProperty = TryCast(binOp.LeftOperand, OperandProperty)
-            If Object.ReferenceEquals(prop, Nothing) Then
-                Return False
-            End If
-            Return prop.PropertyName = SearchPropertyName
-        End Function
+		End Sub
 	End Class
 End Namespace

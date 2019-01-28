@@ -25,16 +25,16 @@ namespace S132472 {
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.pivotGridControl1 = new DevExpress.XtraPivotGrid.PivotGridControl();
-            this.nwindDataSet = new S132472.nwindDataSet();
             this.productReportsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.productReportsTableAdapter = new S132472.nwindDataSetTableAdapters.ProductReportsTableAdapter();
+            this.nwindDataSet = new S132472.nwindDataSet();
             this.fieldCategoryName = new DevExpress.XtraPivotGrid.PivotGridField();
             this.fieldProductName = new DevExpress.XtraPivotGrid.PivotGridField();
             this.fieldProductSales = new DevExpress.XtraPivotGrid.PivotGridField();
             this.fieldShippedDate = new DevExpress.XtraPivotGrid.PivotGridField();
+            this.productReportsTableAdapter = new S132472.nwindDataSetTableAdapters.ProductReportsTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.pivotGridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nwindDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productReportsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nwindDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // pivotGridControl1
@@ -49,23 +49,19 @@ namespace S132472 {
             this.fieldShippedDate});
             this.pivotGridControl1.Location = new System.Drawing.Point(0, 0);
             this.pivotGridControl1.Name = "pivotGridControl1";
-            this.pivotGridControl1.Size = new System.Drawing.Size(552, 329);
+            this.pivotGridControl1.Size = new System.Drawing.Size(634, 411);
             this.pivotGridControl1.TabIndex = 0;
             this.pivotGridControl1.FieldFilterChanged += new DevExpress.XtraPivotGrid.PivotFieldEventHandler(this.pivotGridControl1_FieldFilterChanged);
-            // 
-            // nwindDataSet
-            // 
-            this.nwindDataSet.DataSetName = "nwindDataSet";
-            this.nwindDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // productReportsBindingSource
             // 
             this.productReportsBindingSource.DataMember = "ProductReports";
             this.productReportsBindingSource.DataSource = this.nwindDataSet;
             // 
-            // productReportsTableAdapter
+            // nwindDataSet
             // 
-            this.productReportsTableAdapter.ClearBeforeFill = true;
+            this.nwindDataSet.DataSetName = "nwindDataSet";
+            this.nwindDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // fieldCategoryName
             // 
@@ -101,18 +97,22 @@ namespace S132472 {
             this.fieldShippedDate.Name = "fieldShippedDate";
             this.fieldShippedDate.UnboundFieldName = "fieldShippedDate";
             // 
+            // productReportsTableAdapter
+            // 
+            this.productReportsTableAdapter.ClearBeforeFill = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(552, 329);
+            this.ClientSize = new System.Drawing.Size(634, 411);
             this.Controls.Add(this.pivotGridControl1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "How to Display Field Filter In Prefilter Dialog";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pivotGridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nwindDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productReportsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nwindDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
