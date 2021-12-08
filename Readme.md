@@ -16,4 +16,4 @@
 
 This application handles the [PivotGridControl.FieldFilterChanged](https://docs.devexpress.com/WindowsForms/DevExpress.XtraPivotGrid.PivotGridControl.FieldFilterChanged) event to modify the [Prefilter.Criteria](https://docs.devexpress.com/WindowsForms/DevExpress.XtraPivotGrid.Prefilter.Criteria) property and display the current field's (column) filter.
 
-![screenshot](https://github.com/DevExpress-Examples/how-to-represent-field-filters-in-the-prefilter-e1678/blob/13.1.4%2B/images/screenshot.png)
+![screenshot](./images/screenshot.png)
